@@ -5,36 +5,41 @@
  * and checks if the user's entered value
  * is a month the randomly generated values within the array
  * */
+import java.util.EmptyStackException;
 import java.util.Scanner;
 
 public class ExceptionInClass {
 
 	public static void main(String[] args) {
 		
-		//int userIndex = 0;
-		//int matchInt = 0;
+		int counter = 0;
 		
-		// creates the array
 		int[] indexList = new int[100];
 		Scanner userInput = new Scanner(System.in);
-		// randomly generates values and populates the array
+		
 		for (int i = 0; i < 100; i++) {
 			indexList[i] = (int) (Math.random() * 100);
-			System.out.println(indexList[i]);;
+			//System.out.println(indexList[i]);
 		}
-		// tries a code and catches exceptions
 		
-		System.out.println("Enter integer:");
-		int userIndex = userInput.nextInt();
+		System.out.println("Please choose an index to display");
+		int userEntry = userInput.nextInt();
 		
+		try {
 		
-		
-		for (int i = 0 ; i<100 ;i++) {
-			if (indexList[i] == userIndex) {
-				System.out.println(indexList[i]);
+		for (int i =0 ; i < indexList.length ; i++) {
+			if (userEntry == indexList[i]) {
+				userEntry = indexList[i];
+				counter +=1;
 			}
+			else if(counter == 0) {
+				throw new EmptyStackException();
+			}
+			System.out.println(userEntry);
 		}
-
-		userInput.close();
+		} catch (Exception e) {
+			System.out.println("Out of bounds");
+		}
+			userInput.close();
 	}
 }
